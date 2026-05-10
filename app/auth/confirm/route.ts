@@ -10,16 +10,15 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get('type')
 
   const supabase = await createClient()
-
+  const redirectTo = (url = process.env.NEXT_PUBLIC_HOME_URL!) => redirect(url)
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) redirect('/dashboard')
+    if (!error) redirectTo()
   }
 
   if (token_hash && type) {
     const { error } = await supabase.auth.verifyOtp({ type, token_hash } as any)
-    if (!error) redirect('/dashboard')
+    if (!error) redirectTo()
   }
-
-  redirect('/login')
+  redirectTo('/auth/signin')
 }

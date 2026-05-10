@@ -5,30 +5,30 @@ import { redirect } from 'next/navigation'
 import {createClient} from '../supabase/server'
 
 // Connexion
-export async function signIn(email: string, password: string, redirectTo: string) : Promise<void>
+export async function signIn(email: string, password: string) : Promise<void>
 {
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) throw new Error(error.message)
-  redirect(redirectTo)
+  redirect(process.env.NEXT_PUBLIC_HOME_URL!)
 }
 
 // Inscription 
-export async function signUp(email: string, password: string, redirectTo: string) : Promise<void>
+export async function signUp(email: string, password: string) : Promise<void>
 {
   const supabase = await createClient()
   const { error } = await supabase.auth.signUp({ email, password })
   if (error) throw new Error(error.message)
-  redirect(redirectTo)
+  redirect(process.env.NEXT_PUBLIC_HOME_URL!)
 }
 
 // Déconnexion
-export async function signOut(redirectTo: string) : Promise<void>
+export async function signOut() : Promise<void>
 {
   const supabase = await createClient()
   const { error } = await supabase.auth.signOut()
   if (error) throw new Error(error.message)
-  redirect(redirectTo)
+  redirect(process.env.NEXT_PUBLIC_SITE_URL!)
 }
 
 export async function signInWithGoogle() : Promise<void>
