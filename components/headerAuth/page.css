@@ -1,0 +1,23 @@
+/* Header styles */
+.header-page {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  top: 1%;
+  left: 1%;
+  overflow: hidden;
+}
+
+.header-title {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0b5644;
+}
+
+.header-stars {
+  position: relative;
+  margin-right: 1rem;
+  z-index: 1;
+}

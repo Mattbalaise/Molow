@@ -3,14 +3,13 @@ import Link from 'next/link';
 import './page.css';
 import stars from '@/assets/stars.png';
 import Image from 'next/image';
+import HeaderAuth from '@/components/headerAuth/page';
 
 export default async function SignUpPage({
   searchParams,
 }: {
   searchParams: Promise<{ redirectTo?: string }>;
 }) {
-  const { redirectTo = '/dashboard' } = await searchParams;
-
   async function signUpWrapper(formData: FormData) {
     'use server';
     return signUp(formData.get('email') as string, formData.get('password') as string);
@@ -23,10 +22,7 @@ export default async function SignUpPage({
 
   return (
     <div className="signup-page">
-      <div className="header-page">
-        <Image className="header-stars" src={stars} width={75} height={125} alt="Stars" />
-        <h1 className="header-title">MOLLOW</h1>
-      </div>
+      <HeaderAuth />
       <div className="signup-panel">
         <div className="signup-card">
           <div>
