@@ -1,7 +1,10 @@
 import { signIn, signUp, signInWithGoogle } from '@/server/services/auth.service';
 import Link from 'next/link';
 import './page.css';
-import HeaderAuth from '@/components/headerAuth/page';
+import HeaderAuth from '@/components/Auth/header/page';
+import Button from '@/components/Auth/button/page';
+import GoogleImg from '@/assets/google.png';
+import Input from '@/components/Auth/input/page';
 
 export default async function SignInPage({
   searchParams,
@@ -36,22 +39,19 @@ export default async function SignInPage({
         <h1>Connexion</h1>
         <form>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="Email" required />
+            <Input id="email" name="email" type="email" label="Email" required value="" placeholder="John.Doe@example.com" />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
-            <input id="password" name="password" type="password" placeholder="Mot de passe" required />
+            <Input id="password" name="password" type="password" label="Mot de passe"  required placeholder="●●●●●●●●●●●●●●●●" />
           </div>
           <input type="hidden" name="redirectTo" value={redirectTo} />
-
           <div className="form-actions">
-            <button formAction={signInWrapper} className="button-primary">
-              Se connecter
-            </button>
-            <button formNoValidate formAction={signInWithGoogleWrapper} className="button-secondary">
-              Se connecter avec Google
-            </button>
+            <Button
+              label=""
+              onClick={signInWithGoogleWrapper}
+              title="Se connecter avec Google"
+              image={GoogleImg}
+            />
           </div>
         </form>
 

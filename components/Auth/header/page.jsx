@@ -1,4 +1,5 @@
 
+'use client';
 import Image from 'next/image';
 import stars from '@/assets/stars.png';
 import './page.css';

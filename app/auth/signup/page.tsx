@@ -3,7 +3,7 @@ import Link from 'next/link';
 import './page.css';
 import stars from '@/assets/stars.png';
 import Image from 'next/image';
-import HeaderAuth from '@/components/headerAuth/page';
+import HeaderAuth from '@/components/auth/header/page';
 
 export default async function SignUpPage({
   searchParams,
