@@ -92,23 +92,6 @@
   border: 1px solid rgba(11, 86, 68, 0.25);
 }
 
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: rgba(11, 86, 68, 0.15);
-}
-
-.divider-text {
-  color: rgba(11, 86, 68, 0.5);
-  font-size: 0.875rem;
-}
-
 .text-center {
   text-align: center;
   font-size: 0.875rem;

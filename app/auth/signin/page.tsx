@@ -1,10 +1,11 @@
 import { signIn, signUp, signInWithGoogle } from '@/server/services/auth.service';
 import Link from 'next/link';
 import './page.css';
-import HeaderAuth from '@/components/Auth/header/page';
-import Button from '@/components/Auth/button/page';
+import HeaderAuth from '@/components/Auth/header/header';
+import Button from '@/components/Auth/button/button';
 import GoogleImg from '@/assets/google.png';
-import Input from '@/components/Auth/input/page';
+import Input from '@/components/Auth/input/input';
+import Divider from '@/components/Auth/divider/divider';
 
 export default async function SignInPage({
   searchParams,
@@ -35,17 +36,19 @@ export default async function SignInPage({
   <div className="signin-page">
     <HeaderAuth />
     <main className="signin-container">
-      <section className="signin-form">
+      <section className="signin-form-container">
         <h1>Connexion</h1>
-        <form>
+        <form className="signin-form">  
           <div className="form-group">
-            <Input id="email" name="email" type="email" label="Email" required value="" placeholder="John.Doe@example.com" />
+            <Input id="email" name="email" type="email" label="Email" required defaultValue="" placeholder="John.Doe@example.com" />
           </div>
           <div className="form-group">
-            <Input id="password" name="password" type="password" label="Mot de passe"  required placeholder="●●●●●●●●●●●●●●●●" />
+            <Input id="password" name="password" type="password" label="Mot de passe"  required defaultValue="" placeholder="●●●●●●●●●●●●●●●●" />
           </div>
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <div className="form-actions">
+            <Button onClick={signInWrapper} title="Se connecter" />
+             <Divider text="ou" />
             <Button
               label=""
               onClick={signInWithGoogleWrapper}

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import './page.css';
 import stars from '@/assets/stars.png';
 import Image from 'next/image';
-import HeaderAuth from '@/components/auth/header/page';
-
+import HeaderAuth from '@/components/auth/header/header';
+import Divider from '@/components/Auth/divider/divider';
 export default async function SignUpPage({
   searchParams,
 }: {
@@ -50,13 +50,7 @@ export default async function SignUpPage({
               <button formAction={signUpWrapper} className="button-primary">
                 S'inscrire
               </button>
-
-              <div className="divider">
-                <div className="divider-line" />
-                <span className="divider-text">ou</span>
-                <div className="divider-line" />
-              </div>
-
+              <Divider text="ou" />
               <button
                 formNoValidate
                 formAction={signUpWithGoogleWrapper}

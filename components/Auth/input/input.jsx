@@ -1,5 +1,5 @@
 'use client';
-import './page.css';
+import './input.css';
 
 /**
  * @typedef {Object} InputProps
@@ -7,7 +7,7 @@ import './page.css';
  * @property {string} type
  * @property {string} name
  * @property {string} id
- * @property {string} [value]
+ * @property {string} [defaultValue]
  * @property {string} [placeholder]
  * @property {import('react').ChangeEventHandler<HTMLInputElement>} [onChange]
  * @property {boolean} [required]
@@ -16,7 +16,7 @@ import './page.css';
 /**
  * @param {InputProps} props
  */
-export default function Input({ label, type, name, value, onChange, required, id, placeholder }) {
+export default function Input({ label, type, name, defaultValue, onChange, required, id, placeholder }) {
     const inputProps = {
         id,
         type,
@@ -26,8 +26,8 @@ export default function Input({ label, type, name, value, onChange, required, id
         required,
     };
 
-    if (value !== undefined) {
-        inputProps.value = value;
+    if (defaultValue !== undefined) {
+        inputProps.defaultValue = defaultValue;
     }
     if (onChange) {
         inputProps.onChange = onChange;

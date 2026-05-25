@@ -8,9 +8,10 @@
     color: #0b5644;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
+    width: 80%;
     align-items: center;
     gap: 8px;
+    margin: 0 10% 0 10%;
 }
 
 .button-image {
