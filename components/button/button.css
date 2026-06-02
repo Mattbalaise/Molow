@@ -11,7 +11,7 @@
     width: 80%;
     align-items: center;
     gap: 8px;
-    margin: 0 10% 0 10%;
+    width: 100%;
 }
 
 .button-image {
@@ -20,7 +20,7 @@
     object-fit: contain;
 }
 
-/* .button:hover {
+.button:hover {
     background-color: #e8ddd6;
     border-color: #1f7169;
 }
@@ -32,4 +32,4 @@
 .button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(45, 155, 143, 0.1);
-} */
+}

@@ -3,9 +3,17 @@
 // import { createClient } from "@supabase/supabase-js"
 import { redirect } from 'next/navigation';
 import { createClient } from '../supabase/server';
+type AuthState = {
+  errors?: {
+    username?: string;
+    email?: string;
+    password?: string;
+    general?: string;
+  };
+};
 
 // Connexion
-export async function signIn(email: string, password: string): Promise<void> {
+export async function signIn(email: string, password: string): Promise<AuthState> {
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw new Error(error.message);
@@ -13,7 +21,7 @@ export async function signIn(email: string, password: string): Promise<void> {
 }
 
 // Inscription
-export async function signUp(email: string, password: string): Promise<void> {
+export async function signUp(email: string, password: string): Promise<AuthState> {
   const supabase = await createClient();
   const { error } = await supabase.auth.signUp({ email, password });
   if (error) throw new Error(error.message);

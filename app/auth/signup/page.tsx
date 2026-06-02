@@ -1,63 +1,46 @@
-import { signUp, signInWithGoogle } from '@/server/services/auth.service';
+'use client';
+import { useActionState } from 'react';
+import {signUpWithGoogleWrapper, signUpWrapper } from '@/server/actions/auth.actions';
 import Link from 'next/link';
-import './page.css';
-import stars from '@/assets/stars.png';
-import Image from 'next/image';
-import HeaderAuth from '@/components/auth/header/header';
-import Divider from '@/components/Auth/divider/divider';
-export default async function SignUpPage({
+import google from '@/assets/google.png';
+import '@/app/auth/page.css';
+import HeaderAuth from '@/components/header/header';
+import Divider from '@/components/divider/divider';
+import Button from '@/components/button/button';
+import Input from '@/components/input/input';
+
+export default function SignUpPage({
   searchParams,
 }: {
   searchParams: Promise<{ redirectTo?: string }>;
-}) {
-  async function signUpWrapper(formData: FormData) {
-    'use server';
-    return signUp(formData.get('email') as string, formData.get('password') as string);
-  }
-
-  async function signUpWithGoogleWrapper() {
-    'use server';
-    return signInWithGoogle();
-  }
-
+}) 
+{
+  const [state, action] = useActionState(signUpWrapper, {});
   return (
-    <div className="signup-page">
+    <div className="auth-page">
       <HeaderAuth />
-      <div className="signup-panel">
-        <div className="signup-card">
+      <div className="auth-panel">
+        <div className="auth-card">
           <div>
-            <p className="signup-badge">Bienvenue</p>
-            <h1 className="signup-title">Créer un compte</h1>
+            <p className="auth-badge">Bienvenue</p>
+            <h1 className="auth-title">Créer un compte</h1>
           </div>
-          <form>
+          <form action={action}>
             <div className="form-group">
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                required
-                className="form-input"
-              />
-              <input
-                name="password"
-                type="password"
-                placeholder="Mot de passe"
-                required
-                className="form-input"
-              />
+                 {state.errors && (
+                  <p className="text-sm" style={{color: 'black'}}>{state.errors?.email}{state.errors.password}</p>
+                  )}
+              <Input id="email" name="email" label="Email" type="text"  required defaultValue="" placeholder="Email" />
+              <Input id="password" name="password" type="password" label="Mot de passe" required defaultValue="" placeholder="●●●●●●●●●●●●●●●●" />
             </div>
             <div className="form-actions">
-              <button formAction={signUpWrapper} className="button-primary">
-                S'inscrire
-              </button>
+              <Button title="S'inscrire" label="" style={{backgroundColor : '#0b5644', color: '#ffffff'}} />
               <Divider text="ou" />
-              <button
-                formNoValidate
-                formAction={signUpWithGoogleWrapper}
-                className="button-secondary"
-              >
-                S'inscrire avec Google
-              </button>
+              <Button 
+              formAction={signUpWithGoogleWrapper}
+              title="" label="" 
+              style={{backgroundColor : '#0b5644', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem'}} 
+              image={google} />
             </div>
           </form>
           <p className="text-center">
@@ -68,7 +51,7 @@ export default async function SignUpPage({
           </p>
         </div>
       </div>
-      <div className="signup-side" />
+      <div className="auth-side" />
     </div>
   );
 }

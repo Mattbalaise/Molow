@@ -16,7 +16,7 @@ import './input.css';
 /**
  * @param {InputProps} props
  */
-export default function Input({ label, type, name, defaultValue, onChange, required, id, placeholder }) {
+export default function Input({ label, type = "text", name, defaultValue, onChange, required, id, placeholder }) {
     const inputProps = {
         id,
         type,
