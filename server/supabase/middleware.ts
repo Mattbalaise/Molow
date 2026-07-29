@@ -1,14 +1,24 @@
-import { createClient } from '@/server/supabase/server';
-import { NextResponse, type NextRequest } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
+import type { NextRequest } from 'next/server';
 
-export async function updateSession(
-  request: NextRequest,
-): Promise<{user: any }> {
-  // On instancie le client Supabase avec accès aux cookies
-  const supabase = await createClient();
-  // getUser() → revalide le JWT côté Supabase
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  return { user };
+export async function updateSession(request: NextRequest) {
+  let pending: any[] = [];
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => request.cookies.getAll(),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+          pending = cookiesToSet;
+        },
+      },
+    },
+  );
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  return { user, cookies: pending };
 }
