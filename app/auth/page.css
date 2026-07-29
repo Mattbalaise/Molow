@@ -116,3 +116,15 @@ form{
   font-weight: 500;
   color: #0b5644;
 }
+
+.general-error {
+  color: #c0392b;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  background: #f8f3e1;
+  border: 0.20rem solid #c0392b;
+  border-radius: 12px;
+  padding: 0.675rem;
+}
+

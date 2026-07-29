@@ -5,7 +5,6 @@ const PUBLIC_PATHS = ['/auth', '/auth/signin', '/auth/signup', '/auth/confirm'];
 
 export default async function proxy(request: NextRequest) {
   const { response, user } = await updateSession(request);
-  console.log('User in middleware:', user);
   const pathname = request.nextUrl.pathname;
   const isPublic = PUBLIC_PATHS.some((path) => pathname.startsWith(path));
   //pour le moment à changer plus tard, on redirige vers la page de login si pas d'utilisateur

@@ -31,3 +31,16 @@
     box-shadow: 0 0 0 3px rgba(11, 86, 68, 0.12);
     border-color: #0b5644;
 }
+
+.input-error 
+{
+    position: relative;
+    content: 'i';
+    background-color: white;
+    top: 10px;
+    padding: 1em;
+    font-size: 0.8rem;
+    color: #c0392b;
+    font-weight: 500;
+    margin-left: 5%;
+}

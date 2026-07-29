@@ -1,17 +1,17 @@
 'use client';
 import './button.css';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
-export default function Button({ 
-    title, 
-    image = "", 
-    label = "", 
-    style = {}, 
-    formAction = undefined, 
-    onClick = undefined 
-}: { 
+export default function Button({
+    title,
+    image = "",
+    label = "",
+    style = {},
+    formAction = undefined,
+    onClick = undefined
+}: {
     title: string;
-    image?: string;
+    image?: string | StaticImageData;
     label?: string;
     style?: React.CSSProperties;
     formAction?: () => void | Promise<void>;

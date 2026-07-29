@@ -3,14 +3,7 @@
 // import { createClient } from "@supabase/supabase-js"
 import { redirect } from 'next/navigation';
 import { createClient } from '../supabase/server';
-type AuthState = {
-  errors?: {
-    username?: string;
-    email?: string;
-    password?: string;
-    general?: string;
-  };
-};
+import { AuthState } from '@/server/types/auth.types'
 
 // Connexion
 export async function signIn(email: string, password: string): Promise<AuthState> {
@@ -22,8 +15,10 @@ export async function signIn(email: string, password: string): Promise<AuthState
 
 // Inscription
 export async function signUp(email: string, password: string): Promise<AuthState> {
+  console.log("email : ", email)
   const supabase = await createClient();
   const { error } = await supabase.auth.signUp({ email, password });
+  console.log(error)
   if (error) throw new Error(error.message);
   redirect(process.env.NEXT_PUBLIC_HOME_URL!);
 }
@@ -38,7 +33,6 @@ export async function signOut(): Promise<void> {
 
 export async function signInWithGoogle(): Promise<void> {
   const supabase = await createClient();
-  console.log('helloworld');
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {

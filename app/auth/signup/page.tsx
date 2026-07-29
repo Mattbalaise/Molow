@@ -1,6 +1,6 @@
 'use client';
 import { useActionState } from 'react';
-import {signUpWithGoogleWrapper, signUpWrapper } from '@/server/actions/auth.actions';
+import { signUpWithGoogleWrapper, signUpWrapper } from '@/server/actions/auth/auth.actions';
 import Link from 'next/link';
 import google from '@/assets/google.png';
 import '@/app/auth/page.css';
@@ -9,12 +9,7 @@ import Divider from '@/components/divider/divider';
 import Button from '@/components/button/button';
 import Input from '@/components/input/input';
 
-export default function SignUpPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ redirectTo?: string }>;
-}) 
-{
+export default function SignUpPage() {
   const [state, action] = useActionState(signUpWrapper, {});
   return (
     <div className="auth-page">
@@ -27,20 +22,20 @@ export default function SignUpPage({
           </div>
           <form action={action}>
             <div className="form-group">
-                 {state.errors && (
-                  <p className="text-sm" style={{color: 'black'}}>{state.errors?.email}{state.errors.password}</p>
-                  )}
-              <Input id="email" name="email" label="Email" type="text"  required defaultValue="" placeholder="Email" />
-              <Input id="password" name="password" type="password" label="Mot de passe" required defaultValue="" placeholder="●●●●●●●●●●●●●●●●" />
+              {state.errors && (
+                <p className="general-error">{state.errors?.general}</p>
+              )}
+              <Input id="email" name="email" label="Email" type='text' msgError={state.errors?.email} required defaultValue="" placeholder="john.doe@example.com" />
+              <Input id="password" name="password" type="password" label="Mot de passe" msgError={state.errors?.password} required defaultValue="" placeholder="●●●●●●●●●●●●●●●●" />
             </div>
             <div className="form-actions">
-              <Button title="S'inscrire" label="" style={{backgroundColor : '#0b5644', color: '#ffffff'}} />
+              <Button title="S'inscrire" label="" style={{ backgroundColor: '#0b5644', color: '#ffffff' }} />
               <Divider text="ou" />
-              <Button 
-              formAction={signUpWithGoogleWrapper}
-              title="" label="" 
-              style={{backgroundColor : '#0b5644', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem'}} 
-              image={google} />
+              <Button
+                formAction={signUpWithGoogleWrapper}
+                title="" label=""
+                style={{ backgroundColor: '#0b5644', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}
+                image={google} />
             </div>
           </form>
           <p className="text-center">
