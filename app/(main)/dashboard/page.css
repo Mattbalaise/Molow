@@ -9,20 +9,7 @@
     align-items: center;
     align-self: center;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left: 0%;
     width: 100%;
-    animation: flip 1s ease both;
-}
-
-@keyframes flip {
-    0% {
-        transform: translate(-50%, -50%);
-        display: flex;
-        justify-content: start;
-    }
-
-    100% {
-        transform: translate(-50%, -50%);
-    }
 }

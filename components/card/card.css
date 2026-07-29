@@ -23,7 +23,7 @@
 .card-front,
 .card-back {
   position: absolute;
-  width: 100%;
+  width: 180px;
   height: 100%;
   backface-visibility: hidden;
   border-radius: 12px;
