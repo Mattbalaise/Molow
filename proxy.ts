@@ -5,7 +5,8 @@ const PUBLIC_PATHS = ['/auth', '/auth/signin', '/auth/signup', '/auth/confirm'];
 
 export default async function proxy(request: NextRequest) {
   const response = NextResponse.next({ request });
-  const { user } = await updateSession(request);
+  const { user, cookies } = await updateSession(request);
+  cookies.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
   const pathname = request.nextUrl.pathname;
   const isPublic = PUBLIC_PATHS.some((path) => pathname.startsWith(path));
   //pour le moment à changer plus tard, on redirige vers la page de login si pas d'utilisateur
